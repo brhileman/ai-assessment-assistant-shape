@@ -44,29 +44,38 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Audio waveform animation */
-        @keyframes wave-animation {
-            0%, 100% { height: 4px; }
-            25% { height: 20px; }
-            50% { height: 32px; }
-            75% { height: 16px; }
+        /* Futuristic black hole animation */
+        @keyframes blackhole-pulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: scale(1.1) rotate(180deg);
+                opacity: 1;
+            }
         }
         
-        .wave-bar {
-            animation: wave-animation 1.5s infinite ease-in-out;
-            background: linear-gradient(180deg, #1E60BD 0%, #00ADEF 100%);
+        @keyframes orbit-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        .wave-bar:nth-child(1) { animation-delay: 0s; }
-        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
-        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
-        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
-        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
-        .wave-bar:nth-child(6) { animation-delay: 0.5s; }
-        .wave-bar:nth-child(7) { animation-delay: 0.6s; }
-        .wave-bar:nth-child(8) { animation-delay: 0.7s; }
-        .wave-bar:nth-child(9) { animation-delay: 0.8s; }
-        .wave-bar:nth-child(10) { animation-delay: 0.9s; }
+        .black-hole {
+            background: radial-gradient(circle, 
+                rgba(30, 96, 189, 0.9) 0%, 
+                rgba(0, 173, 239, 0.7) 30%, 
+                rgba(15, 23, 42, 0.8) 60%, 
+                transparent 100%);
+            animation: blackhole-pulse 4s infinite ease-in-out;
+        }
+        
+        .orbit-ring {
+            border: 2px solid rgba(30, 96, 189, 0.3);
+            animation: orbit-ring 8s linear infinite;
+        }
+        
+
         
         /* Recording pulse */
         @keyframes pulse-recording {
@@ -111,47 +120,38 @@
 </head>
 
 <body class="h-full font-proxima antialiased">
+    <!-- Header with Logo -->
+    <header class="fixed top-0 left-0 right-0 z-40 p-6">
+        <div class="flex justify-center">
+            <div class="w-40 h-10 bg-gradient-to-r from-lpl-blue to-lpl-cyan rounded-lg flex items-center justify-center shadow-lg">
+                <span class="text-white text-sm font-semibold">LaunchPad Lab</span>
+            </div>
+        </div>
+    </header>
+
     <!-- Gradient Background -->
-    <div class="gradient-bg flex items-center justify-center p-6">
+    <div class="gradient-bg flex items-center justify-center p-6 pt-24">
         
         <!-- Main Assessment Card -->
         <div class="glass-card rounded-3xl p-8 max-w-md w-full shadow-2xl">
             
             <!-- Header -->
             <div class="text-center mb-8">
-                <!-- LaunchPad Lab Logo -->
-                <div class="mx-auto mb-4 w-40 h-10 bg-gradient-to-r from-lpl-blue to-lpl-cyan rounded-lg flex items-center justify-center">
-                    <span class="text-white text-sm font-semibold">LaunchPad Lab</span>
-                </div>
-                
                 <h1 class="text-2xl font-bold text-white mb-2">AI Assessment</h1>
                 <p class="text-slate-300 text-sm">Acme Corporation</p>
-                
-                <!-- Recording Status -->
-                <div class="mt-4 flex items-center justify-center space-x-2">
-                    <div class="w-2 h-2 bg-red-500 rounded-full recording-pulse"></div>
-                    <span class="text-slate-300 text-xs">Recording in progress</span>
-                </div>
             </div>
             
-            <!-- Audio Waveform Visualization -->
-            <div class="mb-8 bg-slate-800/50 rounded-2xl p-6">
-                <div class="flex items-center justify-center space-x-1 h-12">
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                    <div class="wave-bar w-1 rounded-full"></div>
-                </div>
-                
-                <div class="text-center mt-4">
-                    <p class="text-slate-200 text-lg font-medium">How may I help you today?</p>
-                    <p class="text-slate-400 text-sm mt-1">Tell me about your role and responsibilities...</p>
+            <!-- Futuristic Black Hole Visualization -->
+            <div class="mb-8 bg-slate-800/30 rounded-2xl p-8 flex items-center justify-center">
+                <div class="relative">
+                    <!-- Outer orbit ring -->
+                    <div class="orbit-ring absolute inset-0 w-24 h-24 rounded-full"></div>
+                    <!-- Middle orbit ring -->
+                    <div class="orbit-ring absolute inset-2 w-20 h-20 rounded-full" style="animation-delay: -2s;"></div>
+                    <!-- Inner black hole -->
+                    <div class="black-hole w-16 h-16 rounded-full relative z-10 flex items-center justify-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-lpl-blue to-lpl-cyan rounded-full opacity-60"></div>
+                    </div>
                 </div>
             </div>
             
@@ -310,20 +310,7 @@
                 }
             });
             
-            // Add some interactivity to the waveform
-            const waveBars = document.querySelectorAll('.wave-bar');
-            
-            function randomizeWaves() {
-                waveBars.forEach((bar, index) => {
-                    setTimeout(() => {
-                        const height = Math.random() * 28 + 4;
-                        bar.style.height = height + 'px';
-                    }, index * 100);
-                });
-            }
-            
-            // Update waveform every 2 seconds
-            setInterval(randomizeWaves, 2000);
+            // Black hole is purely CSS animated, no additional JS needed
         });
     </script>
 </body>
