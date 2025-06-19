@@ -44,36 +44,58 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Futuristic black hole animation */
-        @keyframes blackhole-pulse {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg);
-                opacity: 0.8;
-            }
-            50% { 
-                transform: scale(1.1) rotate(180deg);
-                opacity: 1;
-            }
+        /* Futuristic wave animation */
+        @keyframes wave-animation {
+            0%, 100% { height: 6px; }
+            25% { height: 24px; }
+            50% { height: 40px; }
+            75% { height: 18px; }
         }
         
-        @keyframes orbit-ring {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes wave-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(30, 96, 189, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(0, 173, 239, 0.8), 0 0 30px rgba(30, 96, 189, 0.6); }
         }
         
-        .black-hole {
-            background: radial-gradient(circle, 
-                rgba(30, 96, 189, 0.9) 0%, 
-                rgba(0, 173, 239, 0.7) 30%, 
-                rgba(15, 23, 42, 0.8) 60%, 
+        .wave-bar {
+            animation: wave-animation 1.8s infinite ease-in-out, wave-glow 2s infinite ease-in-out;
+            background: linear-gradient(180deg, 
+                #00ADEF 0%, 
+                #1E60BD 50%, 
+                #0B4E95 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wave-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
                 transparent 100%);
-            animation: blackhole-pulse 4s infinite ease-in-out;
+            animation: shimmer 2s infinite;
         }
         
-        .orbit-ring {
-            border: 2px solid rgba(30, 96, 189, 0.3);
-            animation: orbit-ring 8s linear infinite;
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
+        
+        .wave-bar:nth-child(1) { animation-delay: 0s; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { animation-delay: 0.5s; }
+        .wave-bar:nth-child(7) { animation-delay: 0.6s; }
+        .wave-bar:nth-child(8) { animation-delay: 0.7s; }
+        .wave-bar:nth-child(9) { animation-delay: 0.8s; }
+        .wave-bar:nth-child(10) { animation-delay: 0.9s; }
         
 
         
@@ -141,17 +163,19 @@
                 <p class="text-slate-300 text-sm">Acme Corporation</p>
             </div>
             
-            <!-- Futuristic Black Hole Visualization -->
-            <div class="mb-8 bg-slate-800/30 rounded-2xl p-8 flex items-center justify-center">
-                <div class="relative">
-                    <!-- Outer orbit ring -->
-                    <div class="orbit-ring absolute inset-0 w-24 h-24 rounded-full"></div>
-                    <!-- Middle orbit ring -->
-                    <div class="orbit-ring absolute inset-2 w-20 h-20 rounded-full" style="animation-delay: -2s;"></div>
-                    <!-- Inner black hole -->
-                    <div class="black-hole w-16 h-16 rounded-full relative z-10 flex items-center justify-center">
-                        <div class="w-8 h-8 bg-gradient-to-r from-lpl-blue to-lpl-cyan rounded-full opacity-60"></div>
-                    </div>
+            <!-- Futuristic Wave Visualization -->
+            <div class="mb-8 bg-slate-800/30 rounded-2xl p-6">
+                <div class="flex items-center justify-center space-x-2 h-16">
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
+                    <div class="wave-bar w-1.5 rounded-full"></div>
                 </div>
             </div>
             
@@ -310,7 +334,20 @@
                 }
             });
             
-            // Black hole is purely CSS animated, no additional JS needed
+            // Add dynamic wave randomization for extra futuristic effect
+            const waveBars = document.querySelectorAll('.wave-bar');
+            
+            function randomizeWaves() {
+                waveBars.forEach((bar, index) => {
+                    setTimeout(() => {
+                        const height = Math.random() * 35 + 8;
+                        bar.style.height = height + 'px';
+                    }, index * 50);
+                });
+            }
+            
+            // Update waves every 1.5 seconds for more dynamic feel
+            setInterval(randomizeWaves, 1500);
         });
     </script>
 </body>
