@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assessment - LaunchPad Lab</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <!-- Proxima Nova Font (placeholder - replace with actual Adobe Fonts link) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Custom Tailwind config for LaunchPad Lab colors
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'lpl-blue': '#1E60BD',
+                        'lpl-blue-dark': '#0B4E95',
+                        'lpl-blue-light': '#BFD7F0',
+                        'lpl-charcoal': '#2C2C35',
+                        'lpl-gray': '#393942',
+                        'lpl-gray-medium': '#525253',
+                        'lpl-gray-light': '#D9D9D9',
+                        'lpl-off-white': '#EEEEEE',
+                        'lpl-cyan': '#00ADEF'
+                    },
+                    fontFamily: {
+                        'proxima': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom animations for voice interface */
+        @keyframes pulse-recording {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        @keyframes audio-wave {
+            0%, 100% { height: 20px; }
+            25% { height: 40px; }
+            50% { height: 60px; }
+            75% { height: 30px; }
+        }
+        
+        .pulse-recording {
+            animation: pulse-recording 1.5s infinite;
+        }
+        
+        .audio-wave {
+            animation: audio-wave 1s infinite;
+        }
+        
+        .audio-wave:nth-child(2) { animation-delay: 0.1s; }
+        .audio-wave:nth-child(3) { animation-delay: 0.2s; }
+        .audio-wave:nth-child(4) { animation-delay: 0.3s; }
+        .audio-wave:nth-child(5) { animation-delay: 0.4s; }
+    </style>
+</head>
+
+<body class="h-full bg-white font-proxima antialiased">
+    <!-- Main Container -->
+    <div class="min-h-full flex flex-col">
+        <!-- Header with LaunchPad Lab branding -->
+        <header class="bg-white border-b border-lpl-gray-light">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <!-- Logo placeholder - replace with actual SVG -->
+                    <div class="flex items-center">
+                        <div class="w-32 h-8 bg-lpl-blue rounded flex items-center justify-center">
+                            <span class="text-white text-sm font-semibold">LaunchPad Lab</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Status indicator -->
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-500 rounded-full pulse-recording"></div>
+                        <span class="text-sm text-lpl-gray font-medium">Recording</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex items-center justify-center p-4">
+            <div class="w-full max-w-4xl mx-auto">
+                
+                <!-- Assessment Interface Card -->
+                <div class="bg-white rounded-2xl shadow-lg border border-lpl-gray-light p-8 mb-6">
+                    
+                    <!-- Company Context Header -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-2xl font-bold text-lpl-charcoal mb-2">AI Readiness Assessment</h1>
+                        <p class="text-lpl-gray">Acme Corporation • Technology Assessment</p>
+                    </div>
+
+                    <!-- Audio Visualizer -->
+                    <div class="bg-lpl-blue-light rounded-3xl p-6 mb-6">
+                        <div class="flex items-center justify-center space-x-2 h-16">
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 30px;"></div>
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 45px;"></div>
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 25px;"></div>
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 55px;"></div>
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 35px;"></div>
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 40px;"></div>
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 20px;"></div>
+                            <div class="w-1 bg-lpl-blue rounded-full audio-wave" style="height: 50px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Transcript Display -->
+                    <div class="bg-lpl-off-white rounded-xl p-6 mb-6 max-h-96 overflow-y-auto">
+                        <div class="space-y-4">
+                            <!-- AI Message -->
+                            <div class="flex space-x-3">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-lpl-blue rounded-full flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-lg text-lpl-blue mb-1">AI Assistant</p>
+                                    <p class="text-lg text-lpl-charcoal leading-relaxed">
+                                        Hi there! I'm here to learn about your organization's AI readiness. Since you're from Acme Corporation, I'd love to understand your current technology landscape and any AI initiatives you've explored. Could you start by telling me about your role and key responsibilities?
+                                    </p>
+                                    <span class="text-xs text-lpl-gray mt-2 block">2:34 PM</span>
+                                </div>
+                            </div>
+
+                            <!-- User Message -->
+                            <div class="flex space-x-3">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-lpl-gray-light rounded-full flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-lpl-gray" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-lg text-lpl-gray mb-1">You</p>
+                                    <p class="text-lg text-lpl-charcoal leading-relaxed">
+                                        Sure! I'm the CTO at Acme Corporation, and I oversee our entire technology strategy. My main responsibilities include managing our development teams, infrastructure decisions, and evaluating new technologies that could improve our operations. We're particularly focused on improving our customer service efficiency right now.
+                                    </p>
+                                    <span class="text-xs text-lpl-gray mt-2 block">2:35 PM</span>
+                                </div>
+                            </div>
+
+                            <!-- AI Follow-up -->
+                            <div class="flex space-x-3">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-lpl-blue rounded-full flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-lg text-lpl-blue mb-1">AI Assistant</p>
+                                    <p class="text-lg text-lpl-charcoal leading-relaxed">
+                                        That's excellent context! Customer service efficiency is a great area for AI implementation. What does your current technology stack look like, and have you explored any AI or automation tools for customer service yet?
+                                    </p>
+                                    <span class="text-xs text-lpl-gray mt-2 block">2:35 PM</span>
+                                </div>
+                            </div>
+
+                            <!-- Typing indicator -->
+                            <div class="flex space-x-3">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-lpl-gray-light rounded-full flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-lpl-gray" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-lg text-lpl-gray mb-1">You</p>
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-lpl-blue rounded-full animate-bounce"></div>
+                                        <div class="w-2 h-2 bg-lpl-blue rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                                        <div class="w-2 h-2 bg-lpl-blue rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div class="flex justify-center space-x-4">
+                        <!-- Finish Assessment Button -->
+                        <button type="button" class="inline-flex items-center px-8 py-3 border-2 border-lpl-blue text-base font-medium rounded-lg text-lpl-blue bg-white hover:bg-lpl-blue-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lpl-blue transition-colors duration-200">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Finish Assessment
+                        </button>
+                    </div>
+
+                    <!-- Progress Indicator -->
+                    <div class="mt-8 text-center">
+                        <div class="flex justify-center space-x-2 mb-2">
+                            <div class="w-2 h-2 bg-lpl-blue rounded-full"></div>
+                            <div class="w-2 h-2 bg-lpl-blue rounded-full"></div>
+                            <div class="w-2 h-2 bg-lpl-blue rounded-full"></div>
+                            <div class="w-2 h-2 bg-lpl-gray-light rounded-full"></div>
+                            <div class="w-2 h-2 bg-lpl-gray-light rounded-full"></div>
+                            <div class="w-2 h-2 bg-lpl-gray-light rounded-full"></div>
+                        </div>
+                        <p class="text-sm text-lpl-gray">
+                            Duration: 8:42 • Topics covered: Role, Technology Stack • 
+                            <span class="text-lpl-blue">Continue when ready</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Status Bar -->
+                <div class="text-center">
+                    <div class="inline-flex items-center px-4 py-2 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                        <span class="text-sm text-green-700 font-medium">Connected • Audio quality: Excellent</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-lpl-gray-light py-4">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center text-sm text-lpl-gray">
+                    <p>This conversation is confidential and will be reviewed by your LaunchPad Lab consultant.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Confirmation Modal (hidden by default) -->
+    <div id="confirmModal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            
+            <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+                <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <svg class="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 15.5c-.77.833.192 2.5 1.732 2.5z" />
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-semibold text-lpl-charcoal" id="modal-title">
+                            Finish Assessment?
+                        </h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-lpl-gray">
+                                Are you sure you want to finish your assessment? You can always complete more topics if needed.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse space-y-2 sm:space-y-0 sm:space-x-reverse sm:space-x-3">
+                    <button type="button" class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-lpl-blue text-base font-medium text-white hover:bg-lpl-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lpl-blue sm:ml-3 sm:w-auto sm:text-sm">
+                        Yes, Finish
+                    </button>
+                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-lg border border-lpl-gray-light shadow-sm px-4 py-2 bg-white text-base font-medium text-lpl-charcoal hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lpl-blue sm:mt-0 sm:w-auto sm:text-sm">
+                        Continue Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flowbite JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    
+    <!-- Custom JavaScript for voice interface simulation -->
+    <script>
+        // Simulate real-time interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for buttons
+            const finishButton = document.querySelector('button');
+            const modal = document.getElementById('confirmModal');
+            
+            finishButton.addEventListener('click', function() {
+                modal.classList.remove('hidden');
+            });
+            
+            // Close modal on backdrop click or cancel
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal || e.target.textContent === 'Continue Assessment') {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
